@@ -5,7 +5,7 @@ import { getIconClassName } from '@uifabric/styling';
 import { Web } from "sp-pnp-js";
 import CurrentUser  from "sp-pnp-js";
 import {Fabric} from 'office-ui-fabric-react/lib/Fabric';
-import styles from './ProfileCard.module.scss';
+
 import { IProfileCardProps } from '../entities/IProfileCardProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import pnp from "sp-pnp-js"; 
@@ -35,10 +35,10 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
       }
   public render(): React.ReactElement<IProfileCardProps> {
     return (
-      <div className={styles.smileyFace} >
-        <div className={ styles.container }>
-          <div className={styles.row}  >
-            <div className={styles.topCard}  style={{ 
+      <div className="profileCard">
+        <div className="container">
+          <div className="row" >
+            <div className="topCard" style={{ 
       backgroundImage:this.props.backgroundUrl!=''?`url("${ this.props.backgroundUrl}")`: "../images/background.jpg",
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
@@ -47,11 +47,11 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
           </div>
           <div>
          
-            <div className={styles.buttomCardTitle}>{this.state.currentUser.name}</div>
-            <div    className={styles.buttomCardLinks}>
+            <div className="buttomCardTitle">{this.state.currentUser.name}</div>
+            <div    className="buttomCardLinks">
             
-              <a className={styles.buttomCardLink} href={this.props.leftLinkUrl} target='_blank'  data-interception="off"> <img src={require('../images/leftIcon.svg')}  alt="my image" width="40" /><span className={styles.buttomLinkSpan} >{this.props.leftLinkTitle}</span></a> 
-              <a className={styles.buttomCardLink} href={this.props.rightLinkUrl} target='_blank'  data-interception="off"> <img src={require('../images/rightIcon.svg')}  alt="my image" width="40" /><span className={styles.buttomLinkSpan} >{this.props.rightLinkTitle}</span></a>
+              <a className="buttomCardLink" href={this.props.leftLinkUrl} target='_blank'  data-interception="off"> <img src={ this.props.leftLinkIcon!=''?this.props.leftLinkIcon:'../images/leftIcon.jpg'}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.leftLinkTitle}</span></a> 
+              <a className="buttomCardLink" href={this.props.rightLinkUrl} target='_blank'  data-interception="off"> <img src={this.props.rightLinkIcon!=''?this.props.rightLinkIcon :'../images/rightIcon.jpg'}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.rightLinkTitle}</span></a>
             </div>
           </div>
 

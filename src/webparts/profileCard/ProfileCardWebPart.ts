@@ -33,10 +33,12 @@ export default class ProfileCardWebPart extends BaseClientSideWebPart<IProfileCa
         context:this.context.pageContext.web.title,
          web:this.context.pageContext.site.absoluteUrl,
          backgroundUrl:this.properties.backgroundUrl?this.context.pageContext.site.absoluteUrl+this.properties.backgroundUrl: "",
-        leftLinkTitle:this.properties.leftLinkTitle,
+         leftLinkIcon:this.properties.leftLinkIcon?this.context.pageContext.site.absoluteUrl+this.properties.leftLinkIcon: "",
+         leftLinkTitle:this.properties.leftLinkTitle,
          leftLinkUrl:this.properties.leftLinkUrl,
          rightLinkTitle:this.properties.rightLinkTitle,
          rightLinkUrl:this.properties.rightLinkUrl,
+         rightLinkIcon:this.properties.rightLinkIcon?this.context.pageContext.site.absoluteUrl+this.properties.rightLinkIcon: "",
          
       }
     );
