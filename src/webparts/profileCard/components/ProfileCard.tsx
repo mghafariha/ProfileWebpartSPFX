@@ -5,7 +5,8 @@ import { getIconClassName } from '@uifabric/styling';
 import { Web } from "sp-pnp-js";
 import CurrentUser  from "sp-pnp-js";
 import {Fabric} from 'office-ui-fabric-react/lib/Fabric';
-
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { MSGraphClient } from '@microsoft/sp-http';
 import { IProfileCardProps } from '../entities/IProfileCardProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import pnp from "sp-pnp-js"; 
@@ -27,8 +28,10 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
   public async componentDidMount(){
 
     const profile = await pnp.sp.profiles.userProfile;
+    const loginName= profile.AccountName.replace('i:0#.f|membership|','');
+    const pictureUrl= `https://devspfxdevelopement.sharepoint.com/sites/test/_layouts/15/userphoto.aspx?size=S&accountname=${loginName}`
  console.log(profile);
- this.setState({...this.state,currentUser:{name:profile.DisplayName,pictureUrl:profile.PictureUrl}})
+ this.setState({...this.state,currentUser:{name:profile.DisplayName,pictureUrl:  pictureUrl}})
  console.log(profile.pictureUrl);
 
     
