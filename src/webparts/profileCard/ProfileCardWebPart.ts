@@ -11,6 +11,9 @@ import * as strings from 'ProfileCardWebPartStrings';
 import ProfileCard from './components/ProfileCard';
 import { IProfileCardProps } from './entities/IProfileCardProps';
 import pnp from "sp-pnp-js";
+
+const customStyleUrl: any = require('./styles/style.css');
+
 export interface IProfileCardWebPartProps {
   description: string;
   backgroundUrl:string;
@@ -48,7 +51,7 @@ export default class ProfileCardWebPart extends BaseClientSideWebPart<IProfileCa
 
   protected async onInit(): Promise<void> {
     console.log('site',this.context.pageContext.site.absoluteUrl +this.properties.cssUrl);
-    SPComponentLoader.loadCss(this.context.pageContext.site.absoluteUrl +this.properties.cssUrl);
+    this.properties.cssUrl? SPComponentLoader.loadCss(this.context.pageContext.site.absoluteUrl +this.properties.cssUrl):SPComponentLoader.loadCss(customStyleUrl);
  
 
     return super.onInit().then(_ => {

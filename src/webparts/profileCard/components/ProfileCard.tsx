@@ -12,7 +12,9 @@ import { escape } from '@microsoft/sp-lodash-subset';
 import pnp from "sp-pnp-js"; 
 import { IProfileCardState } from '../entities/IProfileCardState';
 
-
+const leftIconUrl: any = require('../images/leftIcon.svg');
+const rightIconUrl: any = require('../images/rightIcon.svg');
+const backgroundUrl: any = require('../images/background.jpg');
 export default class ProfileCard extends React.Component<IProfileCardProps, IProfileCardState> {
 
   constructor(props) {
@@ -29,7 +31,9 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
 
     const profile = await pnp.sp.profiles.userProfile;
     const loginName= profile.AccountName.replace('i:0#.f|membership|','');
-    const pictureUrl= `https://devspfxdevelopement.sharepoint.com/sites/test/_layouts/15/userphoto.aspx?size=S&accountname=${loginName}`
+    console.log('test',this.props);
+
+    const pictureUrl= `${this.props.web}/_layouts/15/userphoto.aspx?size=S&accountname=${loginName}`
  console.log(profile);
  this.setState({...this.state,currentUser:{name:profile.DisplayName,pictureUrl:  pictureUrl}})
  console.log(profile.pictureUrl);
@@ -42,7 +46,7 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
         <div className="container">
           <div className="row" >
             <div className="topCard" style={{ 
-      backgroundImage:this.props.backgroundUrl!=''?`url("${ this.props.backgroundUrl}")`: "../images/background.jpg",
+      backgroundImage:this.props.backgroundUrl!=''?`url("${ this.props.backgroundUrl}")`: `url("${backgroundUrl}")`,
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat'
     }}>
@@ -53,8 +57,8 @@ export default class ProfileCard extends React.Component<IProfileCardProps, IPro
             <div className="buttomCardTitle">{this.state.currentUser.name}</div>
             <div    className="buttomCardLinks">
             
-              <a className="buttomCardLink" href={this.props.leftLinkUrl} target='_blank'  data-interception="off"> <img src={ this.props.leftLinkIcon!=''?this.props.leftLinkIcon:'../images/leftIcon.jpg'}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.leftLinkTitle}</span></a> 
-              <a className="buttomCardLink" href={this.props.rightLinkUrl} target='_blank'  data-interception="off"> <img src={this.props.rightLinkIcon!=''?this.props.rightLinkIcon :'../images/rightIcon.jpg'}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.rightLinkTitle}</span></a>
+              <a className="buttomCardLink" href={this.props.leftLinkUrl} target='_blank'  data-interception="off"> <img src={ this.props.leftLinkIcon!=''?this.props.leftLinkIcon:leftIconUrl}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.leftLinkTitle}</span></a> 
+              <a className="buttomCardLink" href={this.props.rightLinkUrl} target='_blank'  data-interception="off"> <img src={this.props.rightLinkIcon!=''?this.props.rightLinkIcon :rightIconUrl}  alt="my image" width="40" /><span className="buttomLinkSpan" >{this.props.rightLinkTitle}</span></a>
             </div>
           </div>
 
